@@ -13,7 +13,7 @@ const CASES = [
   {
     slug: 'pedi-crisis',
     title: 'Pedi Crisis',
-    thumb: '/img/SteveLibbey-Portfolio-PEDI.jpg',
+    thumb: '/img/Pediatric-Anesthesiology-Fellowship.jpg',
     tags: ['Healthcare', 'Clinical Decision Support', 'Human Factors', '2012–2013'],
     summary: 'A mobile cognitive aid for pediatric anesthesia emergencies, translating clinical crisis protocols into interactive treatment algorithms for iOS and Windows 8 tablets.',
   },
