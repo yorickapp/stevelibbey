@@ -20,7 +20,7 @@ const CASES = [
   {
     slug: 'providence',
     title: 'Providence Clinical Desktop Unification',
-    thumb: '/img/providence-surgery.jpg',
+    thumb: '/img/provlady.jpg',
     tags: ['Healthcare', 'Enterprise UX', 'Citrix', 'Epic'],
     summary: 'Unified a fragmented clinical desktop across 100+ acquired hospitals into a single workflow layer spanning Epic, ServiceNow, and legacy systems inside a Citrix security perimeter.',
   },
