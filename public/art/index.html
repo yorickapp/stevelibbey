@@ -216,7 +216,7 @@
     <input type="email" id="rqEmail" name="email" required autocomplete="email">
     <label for="rqSize">Preferred size (optional)</label>
     <input type="text" id="rqSize" name="size">
-    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="row">
       <button type="submit" class="send" id="rqSend">Send request</button>
       <button type="button" class="cancel" id="rqCancel">Cancel</button>
@@ -228,9 +228,8 @@
 <noscript>This gallery needs JavaScript to show images.</noscript>
 
 <script>
-  // 1. Where requests are delivered, through formsubmit.co.
-  //    After activation, FormSubmit can give you a random alias to use here instead.
-  var EMAIL = "stevelibbey@gmail.com";
+  // 1. web3forms.com access key. Requests go to the email the key was created with.
+  var ACCESS_KEY = "94a9d328-723f-431a-989d-35472a1613e3";
 
   // 2. Folder that holds the images, next to this file.
   var FOLDER = "/art/images/";
@@ -276,13 +275,14 @@
 
     rqSend.disabled = true;
     rqStatus.textContent = "Sending...";
-    fetch("https://formsubmit.co/ajax/" + EMAIL, {
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        _subject: "Print or tee shirt request " + file,
-        _template: "table",
-        _honey: rqForm.elements._honey.value,
+        access_key: ACCESS_KEY,
+        subject: "Print or tee shirt request " + file,
+        from_name: "Art Secret Menu",
+        botcheck: rqForm.elements.botcheck.checked,
         image: file,
         email: rqEmail.value,
         size: size || "(none)",
@@ -291,7 +291,7 @@
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data.success === true || data.success === "true") {
+        if (data.success) {
           rqStatus.textContent = "Sent. I will email you a link to buy.";
           rqForm.reset();
           setTimeout(closeRq, 2200);
