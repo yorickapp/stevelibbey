@@ -216,7 +216,7 @@
     <input type="email" id="rqEmail" name="email" required autocomplete="email">
     <label for="rqSize">Preferred size (optional)</label>
     <input type="text" id="rqSize" name="size">
-    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="row">
       <button type="submit" class="send" id="rqSend">Send request</button>
       <button type="button" class="cancel" id="rqCancel">Cancel</button>
@@ -228,7 +228,8 @@
 <noscript>This gallery needs JavaScript to show images.</noscript>
 
 <script>
-  // 1. Your email address.
+  // 1. Where requests are delivered, through formsubmit.co.
+  //    After activation, FormSubmit can give you a random alias to use here instead.
   var EMAIL = "stevelibbey@gmail.com";
 
   // 2. Folder that holds the images, next to this file.
@@ -247,10 +248,6 @@
     "image07.jpg"
   ];
   // END_IMAGES
-
-  // Your free access key from web3forms.com. It sends each request to your email.
-  // If you leave the placeholder, the form falls back to opening an email draft.
-  var ACCESS_KEY = "YOUR_WEB3FORMS_KEY";
 
   var rq = document.getElementById("rq");
   var rqForm = document.getElementById("rqForm");
@@ -277,32 +274,24 @@
     var file = rqFile.value;
     var size = rqSize.value.trim();
 
-    if (!ACCESS_KEY || ACCESS_KEY === "YOUR_WEB3FORMS_KEY") {
-      var body = "Image: " + file + "\nEmail: " + rqEmail.value + "\nSize: " + size;
-      window.location.href = "mailto:" + EMAIL +
-        "?subject=" + encodeURIComponent("Print or tee shirt request " + file) +
-        "&body=" + encodeURIComponent(body);
-      return;
-    }
-
     rqSend.disabled = true;
     rqStatus.textContent = "Sending...";
-    fetch("https://api.web3forms.com/submit", {
+    fetch("https://formsubmit.co/ajax/" + EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        access_key: ACCESS_KEY,
-        subject: "Print or tee shirt request " + file,
-        from_name: "Print Gallery",
+        _subject: "Print or tee shirt request " + file,
+        _template: "table",
+        _honey: rqForm.elements._honey.value,
         image: file,
         email: rqEmail.value,
-        size: size,
-        botcheck: rqForm.elements.botcheck.checked
+        size: size || "(none)",
+        link: location.origin + FOLDER + file
       })
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (data.success) {
+        if (data.success === true || data.success === "true") {
           rqStatus.textContent = "Sent. I will email you a link to buy.";
           rqForm.reset();
           setTimeout(closeRq, 2200);
