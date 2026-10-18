@@ -496,9 +496,9 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data.success) {
-          rqStatus.textContent = "Sent. I will email you a link to buy.";
+          rqStatus.textContent = "Sent. I will send you a link to buy in 1-2 days.";
           rqForm.reset();
-          setTimeout(closeRq, 2200);
+          setTimeout(closeRq, 3500);
         } else {
           rqStatus.textContent = "Something went wrong. Please try again.";
           rqSend.disabled = false;
