@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>STEVE LIBBEY ART SECRET MENU</title>
+<style>
+  :root {
+    --bg: #111111;
+    --fg: #eeeae2;
+    --muted: #9a958b;
+    --line: #2a2926;
+    --accent: #e8d9b0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.5;
+  }
+  header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 20px 24px;
+  }
+  header h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+  }
+  header p {
+    margin: 0;
+    max-width: 560px;
+    color: var(--muted);
+  }
+  .grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 64px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    border: 1px solid var(--line);
+    background: #181817;
+    display: flex;
+    flex-direction: column;
+  }
+  .card button.thumb {
+    all: unset;
+    cursor: zoom-in;
+    display: block;
+    aspect-ratio: 4 / 5;
+    background: #0c0c0b;
+  }
+  .card button.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .card .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--muted);
+    word-break: break-all;
+  }
+  a.request, button.request {
+    border: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    color: #111;
+    background: var(--accent);
+    text-decoration: none;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    font-family: system-ui, sans-serif;
+  }
+  a.request:hover, button.request:hover { background: #fff; }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .lb {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 7, 0.96);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+  }
+  .lb.open { display: flex; }
+  .lb img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+  }
+  .lb .meta {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .lb .ctrl {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    color: var(--fg);
+    font-family: system-ui, sans-serif;
+    font-size: 1.6rem;
+    padding: 12px 16px;
+  }
+  .lb .close { top: 8px; right: 8px; }
+  .lb .prev { left: 4px; top: 50%; transform: translateY(-50%); }
+  .lb .next { right: 4px; top: 50%; transform: translateY(-50%); }
+  .rq {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 7, 0.82);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 20;
+  }
+  .rq.open { display: flex; }
+  .rq form {
+    width: 100%;
+    max-width: 400px;
+    background: #181817;
+    border: 1px solid var(--line);
+    padding: 24px;
+    font-family: system-ui, sans-serif;
+  }
+  .rq h2 {
+    margin: 0 0 16px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+  .rq label {
+    display: block;
+    margin: 12px 0 4px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .rq input[type="text"], .rq input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    background: #0c0c0b;
+    color: var(--fg);
+    border: 1px solid var(--line);
+    font-size: 1rem;
+  }
+  .rq input[readonly] { color: var(--muted); }
+  .rq .row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .rq .row button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    border: 0;
+    cursor: pointer;
+    font-family: system-ui, sans-serif;
+  }
+  .rq .send { background: var(--accent); color: #111; }
+  .rq .cancel { background: transparent; color: var(--muted); border: 1px solid var(--line) !important; }
+  .rq .status { margin: 14px 0 0; min-height: 1.2em; font-size: 0.9rem; color: var(--accent); }
+  .rq .hp { position: absolute; left: -9999px; }
+  noscript { display: block; padding: 20px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>STEVE LIBBEY ART SECRET MENU</h1>
+  <p>Pick a piece and send a request. I will set it up as a print and tee shirt, then send you a link to buy.</p>
+</header>
+
+<main class="grid" id="grid"></main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="ctrl close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="ctrl prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+  <button class="ctrl next" id="lbNext" aria-label="Next">&#8250;</button>
+  <img id="lbImg" alt="">
+  <div class="meta">
+    <span id="lbName"></span>
+    <button class="request" id="lbReq" type="button">Request this as a print or tee shirt</button>
+  </div>
+</div>
+
+<div class="rq" id="rq" role="dialog" aria-modal="true" aria-label="Request a print or tee shirt">
+  <form id="rqForm">
+    <h2>Request a print or tee shirt</h2>
+    <label for="rqFile">Image</label>
+    <input type="text" id="rqFile" name="image" readonly>
+    <label for="rqEmail">Your email</label>
+    <input type="email" id="rqEmail" name="email" required autocomplete="email">
+    <label for="rqSize">Preferred size (optional)</label>
+    <input type="text" id="rqSize" name="size">
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+    <div class="row">
+      <button type="submit" class="send" id="rqSend">Send request</button>
+      <button type="button" class="cancel" id="rqCancel">Cancel</button>
+    </div>
+    <p class="status" id="rqStatus" role="status"></p>
+  </form>
+</div>
+
+<noscript>This gallery needs JavaScript to show images.</noscript>
+
+<script>
+  // 1. Your email address.
+  var EMAIL = "stevelibbey@gmail.com";
+
+  // 2. Folder that holds the images, next to this file.
+  var FOLDER = "/art/images/";
+
+  // 3. One file name per line. Add or remove lines to change the gallery.
+  //    Or run build_gallery.py to fill this list from the folder.
+  // BEGIN_IMAGES
+  var IMAGES = [
+    "image01.jpg",
+    "image02.jpg",
+    "image03.jpg",
+    "image04.jpg",
+    "image05.jpg",
+    "image06.jpg",
+    "image07.jpg"
+  ];
+  // END_IMAGES
+
+  // Your free access key from web3forms.com. It sends each request to your email.
+  // If you leave the placeholder, the form falls back to opening an email draft.
+  var ACCESS_KEY = "YOUR_WEB3FORMS_KEY";
+
+  var rq = document.getElementById("rq");
+  var rqForm = document.getElementById("rqForm");
+  var rqFile = document.getElementById("rqFile");
+  var rqEmail = document.getElementById("rqEmail");
+  var rqSize = document.getElementById("rqSize");
+  var rqStatus = document.getElementById("rqStatus");
+  var rqSend = document.getElementById("rqSend");
+
+  function openRequest(file) {
+    rqFile.value = file;
+    rqStatus.textContent = "";
+    rqSend.disabled = false;
+    rq.classList.add("open");
+    rqEmail.focus();
+  }
+  function closeRq() { rq.classList.remove("open"); }
+
+  document.getElementById("rqCancel").addEventListener("click", closeRq);
+  rq.addEventListener("click", function (e) { if (e.target === rq) closeRq(); });
+
+  rqForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var file = rqFile.value;
+    var size = rqSize.value.trim();
+
+    if (!ACCESS_KEY || ACCESS_KEY === "YOUR_WEB3FORMS_KEY") {
+      var body = "Image: " + file + "\nEmail: " + rqEmail.value + "\nSize: " + size;
+      window.location.href = "mailto:" + EMAIL +
+        "?subject=" + encodeURIComponent("Print or tee shirt request " + file) +
+        "&body=" + encodeURIComponent(body);
+      return;
+    }
+
+    rqSend.disabled = true;
+    rqStatus.textContent = "Sending...";
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: ACCESS_KEY,
+        subject: "Print or tee shirt request " + file,
+        from_name: "Print Gallery",
+        image: file,
+        email: rqEmail.value,
+        size: size,
+        botcheck: rqForm.elements.botcheck.checked
+      })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          rqStatus.textContent = "Sent. I will email you a link to buy.";
+          rqForm.reset();
+          setTimeout(closeRq, 2200);
+        } else {
+          rqStatus.textContent = "Something went wrong. Please try again.";
+          rqSend.disabled = false;
+        }
+      })
+      .catch(function () {
+        rqStatus.textContent = "Could not send. Please try again.";
+        rqSend.disabled = false;
+      });
+  });
+
+  var grid = document.getElementById("grid");
+  IMAGES.forEach(function (file, i) {
+    var card = document.createElement("div");
+    card.className = "card";
+
+    var btn = document.createElement("button");
+    btn.className = "thumb";
+    btn.setAttribute("aria-label", "View " + file);
+    var img = document.createElement("img");
+    img.src = FOLDER + file;
+    img.alt = file;
+    img.loading = "lazy";
+    btn.appendChild(img);
+    btn.addEventListener("click", function () { openAt(i); });
+
+    var bar = document.createElement("div");
+    bar.className = "bar";
+    var label = document.createElement("span");
+    label.textContent = file;
+    var req = document.createElement("button");
+    req.className = "request";
+    req.type = "button";
+    req.textContent = "Request";
+    req.addEventListener("click", function () { openRequest(file); });
+
+    bar.appendChild(label);
+    bar.appendChild(req);
+    card.appendChild(btn);
+    card.appendChild(bar);
+    grid.appendChild(card);
+  });
+
+  var lb = document.getElementById("lb");
+  var lbImg = document.getElementById("lbImg");
+  var lbName = document.getElementById("lbName");
+  var lbReq = document.getElementById("lbReq");
+  var current = 0;
+
+  function show(i) {
+    current = (i + IMAGES.length) % IMAGES.length;
+    var file = IMAGES[current];
+    lbImg.src = FOLDER + file;
+    lbImg.alt = file;
+    lbName.textContent = file;
+  }
+  lbReq.addEventListener("click", function () { openRequest(IMAGES[current]); });
+  function openAt(i) {
+    show(i);
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.getElementById("lbClose").focus();
+  }
+  function closeLb() {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("lbClose").addEventListener("click", closeLb);
+  document.getElementById("lbPrev").addEventListener("click", function () { show(current - 1); });
+  document.getElementById("lbNext").addEventListener("click", function () { show(current + 1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+  document.addEventListener("keydown", function (e) {
+    if (rq.classList.contains("open")) {
+      if (e.key === "Escape") closeRq();
+      return;
+    }
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+</script>
+</body>
+</html>

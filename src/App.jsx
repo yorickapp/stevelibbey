@@ -11,7 +11,6 @@ import Consulting from './pages/Consulting'
 import Writing from './pages/Writing'
 import WritingArticle from './pages/WritingArticle'
 import Music from './pages/Music'
-import Art from './pages/Art'
 import Projects from './pages/Projects'
 import AiTrust from './pages/AiTrust'
 import Yorick from './pages/Yorick'
@@ -43,7 +42,6 @@ function AppInner() {
         <Route path="/writing" element={<Writing />} />
         <Route path="/writing/:slug" element={<WritingArticle />} />
         <Route path="/music" element={<Music />} />
-        <Route path="/art" element={<Art />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/ai-trust" element={<AiTrust />} />
         <Route path="/yorick" element={<Yorick />} />
